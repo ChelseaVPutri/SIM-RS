@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Title("Login")]
+#[Layout('components.layouts.landing-page')]
 class LandingPage extends Component
 {
     public function render()
