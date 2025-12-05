@@ -14,34 +14,42 @@
         {{-- Login Form - Start --}}
         <div class="rounded-xl bg-white shadow-2xl">
             <div class="p-8 sm:p-10">
-                <div class="flex flex-col gap-4">
-                    {{-- Nomor Induk Pegawai --}}
-                    <div class="flex flex-col">
-                        <label for="" class="flex flex-col min-w-40 flex-1">
-                            <p class="text-black text-sm font-medium leading-normal pb-2">
-                                Nomor Induk Pegawai
-                            </p>
-                            <input type="text" class="form-input flex-w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md text-black ocus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] px-4 py-2 text-base font-normal leading-normal" placeholder="Masukkan NIP Anda">
-                        </label>
-                    </div>
+                <form wire:submit.prevent="login">
+                    <div class="flex flex-col gap-4">
+                        {{-- Nomor Induk Pegawai --}}
+                        <div class="flex flex-col">
+                            <label for="nip" class="flex flex-col min-w-40 flex-1">
+                                <p class="text-black text-sm font-medium leading-normal pb-2">
+                                    Nomor Induk Pegawai
+                                </p>
+                                <input wire:model="nip" type="text" class="form-input flex-w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md text-black ocus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] px-4 py-2 text-base font-normal leading-normal" placeholder="Masukkan NIP Anda">
+                            </label>
+                            @error('nip')
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-                    {{-- Password --}}
-                    <div class="flex flex-col">
-                        <label for="" class="flex flex-col min-w-40 flex-1">
-                            <p class="text-black text-sm font-medium leading-normal pb-2">
-                                Password
-                            </p>
-                            <input type="password" class="form-input flex-w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md text-black ocus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] px-4 py-2 text-base font-normal leading-normal" placeholder="Masukkan password">
-                        </label>
-                    </div>
+                        {{-- Password --}}
+                        <div class="flex flex-col">
+                            <label for="" class="flex flex-col min-w-40 flex-1">
+                                <p class="text-black text-sm font-medium leading-normal pb-2">
+                                    Password
+                                </p>
+                                <input wire:model="password" type="password" class="form-input flex-w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md text-black ocus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] px-4 py-2 text-base font-normal leading-normal" placeholder="Masukkan password">
+                            </label>
+                            @error('password') 
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span> 
+                            @enderror
+                        </div>
 
-                    {{-- Login Button --}}
-                    <div class="pt-4">
-                        <button class="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-md h-12 px-5 bg-primary-blue text-white font-bold leading-normal hover:bg-primary-blue/90 focus:outline-none focus:ring-2 focus:ring-offset-2">
-                            Login
-                        </button>
+                        {{-- Login Button --}}
+                        <div class="pt-4">
+                            <button type="submit" class="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-md h-12 px-5 bg-primary-blue text-white font-bold leading-normal hover:bg-primary-blue/90 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                                Login
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>   
             </div>
         </div>
         {{-- Login Form - End --}}
