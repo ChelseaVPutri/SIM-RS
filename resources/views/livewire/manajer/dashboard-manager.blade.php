@@ -1,5 +1,5 @@
 <div class="flex-1">
-    <div class="mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8" x-data="{ showModal: false }">
         
         {{-- Status Card - Start --}}
         <div class="mb-8 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-900/5">
@@ -82,10 +82,7 @@
 
                         {{-- Employee List --}}
                         <div class="w-full">
-                            {{-- Employee 1 --}}
-                           
                             <livewire:pegawai-table />
-                            
                         </div>
                     </div>
                 </div>
@@ -93,5 +90,261 @@
         </div>
         {{-- Status Card - End --}}
 
+        {{-- Jadwal Mingguan - Start --}}
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold tracking-tight text-[#111318] sm:text-3xl">
+                Jadwal Mingguan
+            </h2>
+            <p class="mt-1 text-base text-[#616f89]">
+                Pilih kartu hari untuk melihat detail lengkap.
+            </p>
+        </div>
+        {{-- Jadwal Mingguan - End --}}
+
+        {{-- Day Card - Start --}}
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {{-- Senin --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-700">
+                            Hari Kerja
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Senin
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Selasa --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-700">
+                            Hari Kerja
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Selasa
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Rabu --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-700">
+                            Hari Kerja
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Rabu
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Kamis --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-700">
+                            Hari Kerja
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Kamis
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Jumat --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-700">
+                            Hari Kerja
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Jumat
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Sabtu --}}
+            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-orange-100 text-orange-600">
+                            Akhir Pekan
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Sabtu
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Minggu --}}
+             <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+                <div class="flex h-ful flex-col justify-between p-6">
+                    {{-- Badge and Icon --}}
+                    <div class="flex items-center justify-between">
+                        {{-- Badge --}}
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-orange-100 text-orange-600">
+                            Akhir Pekan
+                        </span>
+
+                        {{-- Icon --}}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 group-hover:text-primary">
+                                <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    {{-- Nama Hari --}}
+                    <div class="mt-4 ml-1">
+                        <h3 class="text-2xl font-bold text-[#111318]">
+                            Minggu
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Day Card - End --}}
+
+        {{-- Modal - Start --}}
+        <div x-show="showModal" x-clock class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            {{-- Backdrop --}}
+            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/75 bg-opacity-75 transition-opacity backdrop-blur-sm"></div>
+
+            {{-- Modal Wrapper --}}
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    {{-- Modal Content --}}
+                    <div @click.outside="showModal = false" x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl">
+                        {{-- Header --}}
+                        <div class="flex items-center justify-between border-b border-gray-200 px-4 py-4 sm:px-6">
+                            {{-- Icon and Title --}}
+                            <div class="flex items-center gap-3">
+                                {{-- Icon --}}
+                                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-primary">
+                                            <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6zm7 6q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m-4 0q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m8 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14m-4 4q-.425 0-.712-.288T11 17t.288-.712T12 16t.713.288T13 17t-.288.713T12 18m-4 0q-.425 0-.712-.288T7 17t.288-.712T8 16t.713.288T9 17t-.288.713T8 18m8 0q-.425 0-.712-.288T15 17t.288-.712T16 16t.713.288T17 17t-.288.713T16 18"/>
+                                        </svg>
+                                    </span>
+                                </div>
+        
+                                {{-- Header Title --}}
+                                <div>
+                                    <h3 id="modal-title" class="text-lg font-bold leading-6 text-gray-900">
+                                        Detail Jadwal
+                                    </h3>
+                                </div>
+                            </div>
+
+                            {{-- Close Icon --}}
+                            <button @click="showModal = false" type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                <span class="sr-only">Close</span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="m12 13.4l-2.917 2.925q-.277.275-.704.275t-.704-.275q-.275-.275-.275-.7t.275-.7L10.6 12L7.675 9.108Q7.4 8.831 7.4 8.404t.275-.704q.275-.275.7-.275t.7.275L12 10.625L14.892 7.7q.277-.275.704-.275t.704.275q.3.3.3.713t-.3.687L13.375 12l2.925 2.917q.275.277.275.704t-.275.704q-.3.3-.712.3t-.688-.3z"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+        
+                        {{-- Body --}}
+                        <div class="px-4 py-5 sm:p-6">
+                            <livewire:pegawai-table />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{-- Modal - End --}}
     </div>
 </div>
