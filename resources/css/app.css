@@ -15,6 +15,7 @@
     --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
+    --color-primary: #2b6cee;
     --color-primary-blue: #26619C;
     --color-primary-green: #2A9D8F;
 }
