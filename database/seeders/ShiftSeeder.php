@@ -16,8 +16,19 @@ class ShiftSeeder extends Seeder
         DB::table('shift')->insert([
             [
                 'nama_shift' => 'Shift Pagi',
-                // 'waktu_mulai' => ''
-            ]
+                'waktu_mulai' => '00:00:00',
+                'waktu_selesai' => '08:00:00'
+            ],
+            [
+                'nama_shift' => 'Shift Siang',
+                'waktu_mulai' => '08:00:00',
+                'waktu_selesai' => '15:00:00'
+            ],
+            [
+                'nama_shift' => 'Shift Malam',
+                'waktu_mulai' => '15:00:00',
+                'waktu_selesai' => '00:00:00'
+            ],
         ]);
     }
 }
