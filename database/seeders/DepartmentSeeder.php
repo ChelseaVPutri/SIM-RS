@@ -13,7 +13,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('pegawai')->insert([
+        DB::table('department')->insert([
             [
                 'nama_department' => 'UGD'
             ],

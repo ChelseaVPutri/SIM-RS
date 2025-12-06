@@ -25,6 +25,7 @@ class PegawaiFactory extends Factory
             'department_id' => Department::inRandomOrder()->first()->id,
             'sisa_cuti' => 12,
             'password' => Hash::make('123'),
+            'status' => 'aktif', 
             'role' => 'user'
         ];
     }

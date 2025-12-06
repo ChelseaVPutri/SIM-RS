@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pegawai;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,13 +15,12 @@ class PegawaiSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('pegawai')->insert([
-            'nama_lengkap' => "admin",
-            'nip' => '123',
-            'password' => Hash::make('123'),
-            'role' => 'manajer',
-            'department' => 'IGD',
-            'sisa_cuti' => 12
+        Pegawai::factory()->count(2)->create([
+            "role" => "manajer"
+        ]);
+        
+        Pegawai::factory()->count(30)->create([
+            "role" => "user"
         ]);
     }
 }

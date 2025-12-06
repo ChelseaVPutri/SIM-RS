@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string("nama_lengkap");
             $table->string("nip")->index();
-            $table->foreignId('department')->constrained('department');
+
+            // Departmet
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('department')->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->integer('sisa_cuti');
+            $table->enum('status', ['Aktif', 'Sedang Cuti']);
             $table->enum('role', ['manajer', 'user']);
             $table->string('password');
             $table->timestamps();
@@ -28,6 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists("pegawai");
+        Schema::enableForeignKeyConstraints();
     }
 };
