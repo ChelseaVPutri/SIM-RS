@@ -1,4 +1,4 @@
-<nav class="bg-linear-to-r from-primary-blue to-primary-green w-full sticky top-0 shadow-md">
+<nav class="bg-linear-to-r from-primary-blue to-primary-green w-full sticky top-0 shadow-md z-50">
     <div class="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         {{-- Nama Aplikasi - Start --}}
         <div class="flex items-center gap-3">
@@ -22,6 +22,14 @@
                 {{-- Menu List --}}
                 <div class="absolute right-0 mt-2 w-56 origin-top-right scale-95 transform rounded-lg bg-white opacity-0 shadow-lg ring-opacity-5 transition-all duration-200 ease-in-out group-hover:scale-100 group-hover:opacity-100" role="menu">
                     <div class="py-1">
+                        {{-- Dashboard --}}
+                        <a href="{{ route('manajer-dashboard') }}" class="flex w-full items-center gap-3 px-4 py-2 text-sm text-[#111318] hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M15 20v-7h7v7zm-4-9V4h11v7zm-9 9v-7h11v7zm0-9V4h7v7zm11-2h7V6h-7zm-9 9h7v-3H4zm13 0h3v-3h-3zM4 9h3V6H4zm3 0"/>
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+
                         {{-- Tambah Jadwal --}}
                         <a href="" class="flex w-full items-center gap-3 px-4 py-2 text-sm text-[#111318] hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-gray-700">
@@ -31,7 +39,7 @@
                         </a>
 
                         {{-- Daftar Pegawai --}}
-                        <a href="" class="flex w-full items-center gap-3 px-4 py-2 text-sm text-[#111318] hover:bg-gray-100">
+                        <a href="{{ route('daftar-pegawai') }}" class="flex w-full items-center gap-3 px-4 py-2 text-sm text-[#111318] hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                 <path fill="currentColor" d="M0 18v-1.575q0-1.075 1.1-1.75T4 14q.325 0 .625.013t.575.062q-.35.525-.525 1.1t-.175 1.2V18zm6 0v-1.625q0-.8.438-1.463t1.237-1.162T9.588 13T12 12.75q1.325 0 2.438.25t1.912.75t1.225 1.163t.425 1.462V18zm13.5 0v-1.625q0-.65-.162-1.225t-.488-1.075q.275-.05.563-.062T20 14q1.8 0 2.9.663t1.1 1.762V18zM8.125 16H15.9q-.25-.5-1.388-.875T12 14.75t-2.512.375T8.125 16M4 13q-.825 0-1.412-.587T2 11q0-.85.588-1.425T4 9q.85 0 1.425.575T6 11q0 .825-.575 1.413T4 13m16 0q-.825 0-1.412-.587T18 11q0-.85.588-1.425T20 9q.85 0 1.425.575T22 11q0 .825-.575 1.413T20 13m-8-1q-1.25 0-2.125-.875T9 9q0-1.275.875-2.137T12 6q1.275 0 2.138.863T15 9q0 1.25-.862 2.125T12 12m0-2q.425 0 .713-.288T13 9t-.288-.712T12 8t-.712.288T11 9t.288.713T12 10m0-1"/>
                             </svg>
