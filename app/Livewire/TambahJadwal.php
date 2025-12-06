@@ -24,7 +24,7 @@ class TambahJadwal extends Component
     public function mount() {
         $this->departments = Department::all();
         $this->shifts = Shift::all();
-        $this->total_pegawai_count = Pegawai::count();
+        $this->total_pegawai_count = Pegawai::where('role', 'user')->count();
         $this->jadwal_baru_count = Jadwal::whereDate('created_at', today())->count();
     }
 

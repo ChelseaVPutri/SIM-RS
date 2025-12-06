@@ -27,7 +27,7 @@
                     Total Perawat
                 </p>
                 <p class="text-lg font-bold text-gray-900">
-                    30
+                    {{ $total_pegawai_count }}
                 </p>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     Perawat Aktif
                 </p>
                 <p class="text-lg font-bold text-gray-900">
-                    30
+                    {{ $total_pegawai_aktif_count }}
                 </p>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     Sedang Cuti
                 </p>
                 <p class="text-lg font-bold text-gray-900">
-                    30
+                    {{ $total_pegawai_cuti_count }}
                 </p>
             </div>
         </div>
