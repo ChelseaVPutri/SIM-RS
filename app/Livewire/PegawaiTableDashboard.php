@@ -35,10 +35,6 @@ final class PegawaiTableDashboard extends PowerGridComponent
         ];
     }
 
-    public function datasource(): Builder
-    {
-        return Pegawai::query();
-    }
 
     public function fields(): PowerGridFields
     {
@@ -46,10 +42,7 @@ final class PegawaiTableDashboard extends PowerGridComponent
             ->add('id')
             ->add('nama_lengkap')
             ->add('nip')
-            ->add('department');
-            // ->add('name_lower', fn (Pegawai $model) => strtolower(e($model->name)))
-            // ->add('created_at')
-            // ->add('created_at_formatted', fn (Pegawai $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->add('nama_dept_asli');
     }
 
     public function columns(): array
@@ -65,25 +58,23 @@ final class PegawaiTableDashboard extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Department', 'department')
+            Column::make('Department', 'nama_dept_asli', 'department.nama_department')
                 ->sortable()
                 ->searchable(),
-            // Column::make('ID', 'id')
-            //     ->searchable()
-            //     ->sortable(),
 
-            // Column::make('Name', 'name')
-            //     ->searchable()
-            //     ->sortable(),
-
-            // Column::make('Created at', 'created_at')
-            //     ->hidden(),
-
-            // Column::make('Created at', 'created_at_formatted', 'created_at')
-            //     ->searchable(),
-
-            // Column::action('Action')
         ];
+    }
+
+    public function datasource(): Builder {
+        return Pegawai::query()
+            // Gabungkan tabel: (nama_tabel_tujuan, fk_di_pegawai, operator, id_tujuan)
+            ->join('department', 'pegawai.department_id', '=', 'department.id') 
+        
+            // Pilih semua data pegawai, DAN ambil nama_department sebagai alias baru
+            ->select([
+                'pegawai.*', 
+                'department.nama_department as nama_dept_asli'
+        ]);
     }
 
     public function filters(): array
