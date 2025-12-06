@@ -18,7 +18,9 @@ class PegawaiSeeder extends Seeder
             'nama_lengkap' => "admin",
             'nip' => '123',
             'password' => Hash::make('123'),
-            'role' => 'manajer'
+            'role' => 'manajer',
+            'department' => 'IGD',
+            'sisa_cuti' => 12
         ]);
     }
 }

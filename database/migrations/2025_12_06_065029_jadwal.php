@@ -22,6 +22,10 @@ return new class extends Migration
             // Shift
             $table->unsignedBigInteger('shift_id');
             $table->foreign('shift_id')->references('id')->on('shift')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('pegawai_id')->constrained('pegawai')->onDelete('cascade')->onUpdate('cascade');
+
+            // Shift
+            $table->foreignId('shift_id')->constrained('shift');
             
             $table->timestamps();
         });
@@ -32,8 +36,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('jadwal');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('jadwal');
     }
 };

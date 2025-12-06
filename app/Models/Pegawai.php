@@ -26,5 +26,17 @@ class Pegawai extends Authenticatable
     {
         return 'nip';
     }
+
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function jadwal() {
+        return $this->hasMany(Jadwal::class);
+    }
+
+    public function pengajuanCuti() {
+        return $this->hasMany(PengajuanCuti::class);
+    }
     
 }

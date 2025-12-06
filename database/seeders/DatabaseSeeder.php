@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(PegawaiSeeder::class);
+        $this->call(DepartmentSeeder::class);
+        $this->call(ShiftSeeder::class);
     }
 }

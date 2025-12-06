@@ -27,13 +27,12 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('pengajuan_cuti');
         Schema::enableForeignKeyConstraints();
+
     }
 };
