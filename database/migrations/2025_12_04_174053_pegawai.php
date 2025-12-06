@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("nama_lengkap");
             $table->string("nip")->index();
-            $table->string("password");
+            $table->enum('role', ['manajer', 'user']);
             $table->string("role");
             $table->timestamps();
         });

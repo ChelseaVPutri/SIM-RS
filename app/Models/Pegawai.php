@@ -2,15 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pegawai extends Model
+
+class Pegawai extends Authenticatable
 {
+    protected $table = "pegawai";
+    
     protected $fillable = [
         'nama_lengkap',
         'nip',
         'password',
         'role'
     ];
+
+    protected $hidden = ['password'];
+
+    protected $casts = [
+        'password' => 'hashed'
+    ];
+
+    public function getAuthIdentifierName()
+    {
+        return 'nip';
+    }
     
 }

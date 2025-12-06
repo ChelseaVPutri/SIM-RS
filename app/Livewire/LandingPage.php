@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Validation\ValidationException;
 
 #[Layout('components.layouts.landing-page')]
 class LandingPage extends Component
@@ -27,16 +28,18 @@ class LandingPage extends Component
         
         if(Auth::attempt(['nip' => $this->nip,'password'=> $this->password])) {
             session()->regenerate();
-            $role = ['admin', 'staff'];
+            $pegawai = Auth::user();
 
-            if($role === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
+            if($pegawai->role === 'manajer') {
+                return redirect()->intended(route('manajer-dashboard'));
             } else {
                 return redirect()->intended(route('user.dashboard'));
             }
         }
 
-        $this->addError('nip', 'NIP atau Password salah.');
+        throw ValidationException::withMessages([
+            'password' => 'NIP atau password yang Anda masukkan salah.',
+        ]);
     }
 
     public function render()
