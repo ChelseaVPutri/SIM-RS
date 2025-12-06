@@ -161,7 +161,7 @@
                             Jadwal Baru
                         </p>
                         <p class="text-xl font-bold text-gray-900">
-                            0
+                            {{ $jadwal_baru_count }}
                         </p>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                             Total Pegawai
                         </p>
                         <p class="text-xl font-bold text-gray-900">
-                            0
+                            {{ $total_pegawai_count }}
                         </p>
                     </div>
                 </div>
@@ -192,13 +192,18 @@
             {{-- Table Container --}}
             <div class="bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
                 {{-- Header --}}
-                <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <div class="px-5 py-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                     <h3 class="text-lg font-semibold text-gray-900">
                         Jadwal Baru Ditambahkan
                     </h3>
                     <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg bg-[#E5E5E5] text-[#808080]">
                         Hari Ini
                     </span>
+                </div>
+
+                {{-- Table --}}
+                <div class="p-3">
+                    <livewire:jadwal-table />
                 </div>
             </div>
         </div>

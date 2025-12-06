@@ -53,6 +53,7 @@ class TambahJadwal extends Component
         $this->reset(['pegawai_id', 'shift_id', 'tanggal']);
         $this->jadwal_baru_count++;
         $this->dispatch('show-toast', message: 'Jadwal berhasil disimpan!');
+        $this->dispatch('pg:eventRefresh-jadwalTable');
     }
 
     public function render()
