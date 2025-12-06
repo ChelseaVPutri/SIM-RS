@@ -21,7 +21,7 @@ class CustomTheme extends Tailwind
             ],
 
             'header' => [
-                'thead'    => 'shadow-sm rounded-t-lg bg-[#26619C]',
+                'thead'    => 'shadow-sm rounded-t-lg bg-[#023e8a]',
                 'tr'       => '',
                 'th'       => 'font-extrabold px-3 py-3 text-left text-sm text-white tracking-wider whitespace-nowrap dark:text-pg-primary-300',
                 'thAction' => '!font-bold',

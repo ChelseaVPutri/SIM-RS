@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("pegawai", function (Blueprint $table) {
+        Schema::create('jadwal', function(Blueprint $table) {
             $table->id();
-            $table->string("nama_lengkap");
-            $table->string("nip")->index();
-            $table->foreignId('department')->constrained('department');
-            $table->integer('sisa_cuti');
-            $table->enum('role', ['manajer', 'user']);
-            $table->string('password');
+            $table->date('tanggal');
+            
+            // Pegawai
+            $table->foreignId('pegawai_id')->constrained('pegawai')->onDelete('cascade')->onUpdate('cascade');
+
+            // Shift
+            $table->foreignId('shift_id')->constrained('shift');
+            
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("pegawai");
+        Schema::dropIfExists('jadwal');
     }
 };

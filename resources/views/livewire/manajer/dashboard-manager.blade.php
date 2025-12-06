@@ -82,7 +82,7 @@
 
                         {{-- Employee List --}}
                         <div class="w-full">
-                            <livewire:pegawai-table />
+                            <livewire:pegawai-table-dashboard />
                         </div>
                     </div>
                 </div>
@@ -338,7 +338,7 @@
         
                         {{-- Body --}}
                         <div class="px-4 py-5 sm:p-6">
-                            <livewire:pegawai-table />
+                            <livewire:pegawai-table-dashboard />
                         </div>
                     </div>
                 </div>

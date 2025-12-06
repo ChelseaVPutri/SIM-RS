@@ -14,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
-final class PegawaiTable extends PowerGridComponent
+final class PegawaiTableDashboard extends PowerGridComponent
 {
     public int $perPage = 5;
     public string $tableName = 'pegawaiTable';
@@ -45,7 +45,8 @@ final class PegawaiTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('nama_lengkap')
-            ->add('nip');
+            ->add('nip')
+            ->add('department');
             // ->add('name_lower', fn (Pegawai $model) => strtolower(e($model->name)))
             // ->add('created_at')
             // ->add('created_at_formatted', fn (Pegawai $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
@@ -61,6 +62,10 @@ final class PegawaiTable extends PowerGridComponent
                 ->searchable(),
 
             Column::make('NIP', 'nip')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Department', 'department')
                 ->sortable()
                 ->searchable(),
             // Column::make('ID', 'id')
