@@ -2,26 +2,19 @@
 
 namespace App\Livewire;
 
-use App\Livewire\PowerGrid\Themes\CustomTheme;
 use App\Models\Pegawai;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
-use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
-final class PegawaiTableDashboard extends PowerGridComponent
+final class DaftarPegawaiTable extends PowerGridComponent
 {
-    public int $perPage = 5;
-    public string $tableName = 'pegawaiTable';
-
-    public function template(): ?string {
-        return CustomTheme::class;
-    }
+    public string $tableName = 'daftarPegawaiTable';
 
     public function setUp(): array
     {
@@ -30,42 +23,13 @@ final class PegawaiTableDashboard extends PowerGridComponent
                 ->showSearchInput(),
 
             PowerGrid::footer()
-                ->showPerPage(5, [5, 10, 25, 50])
+                ->showPerPage()
                 ->showRecordCount(),
         ];
     }
 
-
-    public function fields(): PowerGridFields
+    public function datasource(): Builder
     {
-        return PowerGrid::fields()
-            ->add('id')
-            ->add('nama_lengkap')
-            ->add('nip')
-            ->add('nama_dept_asli');
-    }
-
-    public function columns(): array
-    {
-        return [
-            Column::make('No', 'id'),
-
-            Column::make('Nama Lengkap', 'nama_lengkap')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('NIP', 'nip')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Department', 'nama_dept_asli', 'department.nama_department')
-                ->sortable()
-                ->searchable(),
-
-        ];
-    }
-
-    public function datasource(): Builder {
         return Pegawai::query()
             // Gabungkan tabel: (nama_tabel_tujuan, fk_di_pegawai, operator, id_tujuan)
             ->join('department', 'pegawai.department_id', '=', 'department.id') 
@@ -77,11 +41,64 @@ final class PegawaiTableDashboard extends PowerGridComponent
         ]);
     }
 
+    public function relationSearch(): array
+    {
+        return [];
+    }
+
+    public function fields(): PowerGridFields
+    {   
+        return PowerGrid::fields()
+            ->add('id')
+            ->add('nama_lengkap')
+            ->add('nip')
+            ->add('nomor_telepon')
+            ->add('nama_dept_asli')
+            ->add('status', function (Pegawai $model) {
+                $status = $model->status ?? 'Tidak Diketahui';
+
+                if($status === 'Aktif') {
+                    $badges = 'bg-[#D7EFEA] text-[#006569]';
+                } else if($status === 'Cuti') {
+                    $badges = 'bg-[#FCF5CD] text-[#BA9F0B]';
+                } else {
+                    $badges = 'bg-[#E5E5E5] text-[#808080]';
+                }
+
+                return "<span class='inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg {$badges}'>{$status}</span>";
+            });
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make('No', 'id'),
+
+            Column::make('Nama lengkap', 'nama_lengkap')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('NIP', 'nip')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Nomor Telepon', 'nomor_telepon')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Department', 'nama_dept_asli', 'department.nama_department')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Status', 'status')
+                ->sortable()
+                ->searchable()
+        ];
+    }
+
     public function filters(): array
     {
         return [
-            Filter::inputText('name'),
-            Filter::datepicker('created_at_formatted', 'created_at'),
         ];
     }
 
@@ -103,7 +120,7 @@ final class PegawaiTableDashboard extends PowerGridComponent
     // }
 
     /*
-    public function actionRules(Pegawai $row): array
+    public function actionRules($row): array
     {
        return [
             // Hide button edit for ID 1
