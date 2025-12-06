@@ -17,7 +17,7 @@
     </style>
 </head>
 
-<body class="min-h-screen relative flex flex-col w-full">
+<body class="min-h-screen relative flex flex-col w-full bg-[#f6f6f8]">
     {{-- Navbar --}}
     <livewire:navbar />
 
