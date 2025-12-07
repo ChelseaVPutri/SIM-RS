@@ -32,7 +32,8 @@ final class DaftarPegawaiTable extends PowerGridComponent
     {
         return Pegawai::query()
             // Gabungkan tabel: (nama_tabel_tujuan, fk_di_pegawai, operator, id_tujuan)
-            ->join('department', 'pegawai.department_id', '=', 'department.id') 
+            ->join('department', 'pegawai.department_id', '=', 'department.id')
+            ->where('pegawai.role', '!=', 'manajer') 
         
             // Pilih semua data pegawai, DAN ambil nama_department sebagai alias baru
             ->select([
