@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PengajuanCuti extends Model
 {
-    protected $Table = 'pengajuan_cuti';
+    protected $table = 'pengajuan_cuti';
 
     protected $fillable = [
         'pegawai_id',
@@ -14,7 +14,8 @@ class PengajuanCuti extends Model
         'tanggal_mulai_cuti',
         'tanggal_selesai_cuti',
         'alasan_cuti',
-        'foto_surat_dokter'
+        'foto_bukti',
+        'status',
     ];
 
     public function pegawai() {
