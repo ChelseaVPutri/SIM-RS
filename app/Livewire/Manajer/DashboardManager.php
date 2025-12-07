@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Manajer;
 
 use Livewire\Attributes\Title;
 use Livewire\Component;

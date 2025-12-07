@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Manajer;
 
 use App\Models\Pegawai;
 use Livewire\Attributes\Title;
@@ -20,6 +20,6 @@ class DaftarPegawai extends Component
     }
     public function render()
     {
-        return view('livewire.daftar-pegawai');
+        return view('livewire.manajer.daftar-pegawai');
     }
 }

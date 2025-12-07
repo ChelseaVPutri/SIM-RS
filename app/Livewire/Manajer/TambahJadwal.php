@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Manajer;
 
 use App\Models\Department;
 use App\Models\Pegawai;
@@ -58,6 +58,6 @@ class TambahJadwal extends Component
 
     public function render()
     {
-        return view('livewire.tambah-jadwal');
+        return view('livewire.manajer.tambah-jadwal');
     }
 }

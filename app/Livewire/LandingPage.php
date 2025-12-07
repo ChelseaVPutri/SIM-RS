@@ -33,7 +33,7 @@ class LandingPage extends Component
             if($pegawai->role === 'manajer') {
                 return redirect()->intended(route('manajer-dashboard'));
             } else {
-                return redirect()->intended(route('user.dashboard'));
+                return redirect()->intended(route('pengajuan-cuti'));
             }
         }
 

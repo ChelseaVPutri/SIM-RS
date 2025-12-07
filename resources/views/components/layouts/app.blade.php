@@ -19,7 +19,7 @@
 
 <body class="min-h-screen relative flex flex-col w-full bg-[#f6f6f8]">
     {{-- Navbar --}}
-    <livewire:navbar />
+    <livewire:manajer.navbar />
 
     {{-- Main Content --}}
     <div>
