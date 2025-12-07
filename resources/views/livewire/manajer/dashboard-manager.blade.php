@@ -1,5 +1,52 @@
 <div class="flex-1">
-    <div class="mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8" x-data="{ showModal: false }">
+    <div class="mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8"
+    x-data="{ 
+        showModal: false,
+        currentShift: '',
+        currentShiftTime: '',
+        weekDates: [],
+
+        init() {
+            this.updateClock();
+            this.calculateWeekDates();
+            setInterval(() => this.updateClock(), 1000);
+        },
+
+        updateClock() {
+            const now = new Date();
+            const hour = now.getHours();
+
+            if (hour >= 0 && hour < 8) {
+                this.currentShift = 'Shift Pagi';
+                this.currentShiftTime = '00:00 - 08:00';
+            } else if (hour >= 8 && hour < 15) {
+                this.currentShift = 'Shift Siang';
+                this.currentShiftTime = '08:00 - 15:00';
+            } else {
+                this.currentShift = 'Shift Malam';
+                this.currentShiftTime = '15:00 - 00:00';
+            }
+        },
+
+        calculateWeekDates() {
+            let curr = new Date();
+            let first = curr.getDate() - curr.getDay() + (curr.getDay() == 0 ? -6 : 1);
+
+            let days = [];
+            for (let i = 0; i < 7; i++) {
+                let next = new Date(curr.setDate(first + i));
+                days.push(next.toISOString().slice(0, 10)); // format y-m-d
+                curr = new Date(); // reset curr
+            }
+            this.weekDates = days;
+        },
+
+        openModal(dayIndex) {
+            let selectedDate = this.weekDates[dayIndex];
+            this.showModal = true;
+            Livewire.dispatch('update-tanggal-modal', { tanggal: selectedDate });
+        }
+     }">
         
         {{-- Status Card - Start --}}
         <div class="mb-8 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-900/5">
@@ -64,11 +111,16 @@
 
                         {{-- Current Shift --}}
                         <div class="mt-4">
-                            <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg gap-2 bg-blue-100 text-blue-700">
+                            <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg gap-2 bg-blue-100 text-blue-700"
+                            :class="{
+                                'bg-teal-100 text-teal-700': currentShift === 'Shift Pagi',
+                                'bg-blue-100 text-blue-700': currentShift === 'Shift Siang',
+                                'bg-indigo-100 text-indigo-700': currentShift === 'Shift Malam'
+                            }">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="m15.3 16.7l1.4-1.4l-3.7-3.7V7h-2v5.4zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/>
                                 </svg>
-                                Shift Siang (15:00 - 23:00)
+                                <span x-text="currentShift + ' (' + currentShiftTime + ')'"></span>
                             </span>
                         </div>
                     </div>
@@ -82,7 +134,7 @@
 
                         {{-- Employee List --}}
                         <div class="w-full">
-                            <livewire:pegawai-table-dashboard />
+                            <livewire:pegawai-table-dashboard tableName="mainTable" />
                         </div>
                     </div>
                 </div>
@@ -104,7 +156,7 @@
         {{-- Day Card - Start --}}
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {{-- Senin --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(0)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -126,12 +178,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Senin
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[0]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Selasa --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(1)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -153,12 +206,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Selasa
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[1]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Rabu --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(2)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -180,12 +234,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Rabu
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[2]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Kamis --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(3)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -207,12 +262,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Kamis
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[3]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Jumat --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(4)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -234,12 +290,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Jumat
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[4]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Sabtu --}}
-            <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+            <div @click="openModal(5)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -261,12 +318,13 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Sabtu
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[5]"></p>
                     </div>
                 </div>
             </div>
 
             {{-- Minggu --}}
-             <div @click="showModal = true" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
+             <div @click="openModal(6)" class="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-primary hover:shadow-lg">
                 <div class="flex h-ful flex-col justify-between p-6">
                     {{-- Badge and Icon --}}
                     <div class="flex items-center justify-between">
@@ -288,6 +346,7 @@
                         <h3 class="text-2xl font-bold text-[#111318]">
                             Minggu
                         </h3>
+                        <p class="text-sm text-gray-500 mt-1" x-text="weekDates[6]"></p>
                     </div>
                 </div>
             </div>
@@ -338,7 +397,7 @@
         
                         {{-- Body --}}
                         <div class="px-4 py-5 sm:p-6">
-                            <livewire:pegawai-table-dashboard />
+                            <livewire:pegawai-table-dashboard tableName="modalTable" />
                         </div>
                     </div>
                 </div>

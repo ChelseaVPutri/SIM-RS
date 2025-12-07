@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use App\Livewire\PowerGrid\Themes\CustomTheme;
+use App\Models\Jadwal;
 use App\Models\Pegawai;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
@@ -17,7 +19,8 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 final class PegawaiTableDashboard extends PowerGridComponent
 {
     public int $perPage = 5;
-    public string $tableName = 'pegawaiTable';
+    public string $tanggalFilter;
+    public string $tableName = 'defaultTable';
 
     public function template(): ?string {
         return CustomTheme::class;
@@ -25,6 +28,9 @@ final class PegawaiTableDashboard extends PowerGridComponent
 
     public function setUp(): array
     {
+        if(!isset($this->tanggalFilter)) {
+            $this->tanggalFilter = now()->format('Y-m-d');
+        }
         return [
             PowerGrid::header()
                 ->showSearchInput(),
@@ -35,6 +41,14 @@ final class PegawaiTableDashboard extends PowerGridComponent
         ];
     }
 
+    #[On('update-tanggal-modal')]
+    public function updateTanggal($tanggal) {
+        if($this->tableName === 'modalTable') {
+            $this->tanggalFilter = $tanggal;
+            $this->resetPage();
+        }
+    }
+
 
     public function fields(): PowerGridFields
     {
@@ -42,39 +56,56 @@ final class PegawaiTableDashboard extends PowerGridComponent
             ->add('id')
             ->add('nama_lengkap')
             ->add('nip')
-            ->add('nama_dept_asli');
+            ->add('nama_department')
+            ->add('shift_info', function ($row) {
+                 // Format tampilan shift
+                $start = Carbon::parse($row->waktu_mulai)->format('H:i');
+                $end = Carbon::parse($row->waktu_selesai)->format('H:i');
+                return "
+                    <div class='flex flex-col'>
+                        <span class='font-bold text-gray-800'>{$row->nama_shift}</span>
+                        <span class='text-xs text-gray-500'>{$start} - {$end} WIB</span>
+                    </div>
+                ";
+            });
     }
 
     public function columns(): array
     {
         return [
-            Column::make('No', 'id'),
+            Column::make('No', 'id')->index(),
 
-            Column::make('Nama Lengkap', 'nama_lengkap')
+            Column::make('Nama Lengkap', 'nama_lengkap', 'pegawai.nama_lengkap')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('NIP', 'nip')
+            Column::make('NIP', 'nip', 'pegawai.nip')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Department', 'nama_dept_asli', 'department.nama_department')
+            Column::make('Department', 'nama_department', 'department.nama_department')
                 ->sortable()
                 ->searchable(),
-
+            
+            Column::make('Shift', 'shift_info', 'shift.nama_shift')
         ];
     }
 
     public function datasource(): Builder {
-        return Pegawai::query()
-            // Gabungkan tabel: (nama_tabel_tujuan, fk_di_pegawai, operator, id_tujuan)
-            ->join('department', 'pegawai.department_id', '=', 'department.id') 
-        
-            // Pilih semua data pegawai, DAN ambil nama_department sebagai alias baru
+        return Jadwal::query()
+            ->join('pegawai', 'jadwal.pegawai_id', '=', 'pegawai.id')
+            ->join('department', 'pegawai.department_id', '=', 'department.id')
+            ->join('shift', 'jadwal.shift_id', '=', 'shift.id')
+            ->whereDate('jadwal.tanggal', $this->tanggalFilter) // Filter tanggal dinamis
             ->select([
-                'pegawai.*', 
-                'department.nama_department as nama_dept_asli'
-        ]);
+                'jadwal.id',
+                'pegawai.nama_lengkap',
+                'pegawai.nip',
+                'department.nama_department',
+                'shift.nama_shift',
+                'shift.waktu_mulai',
+                'shift.waktu_selesai',
+            ]);
     }
 
     public function filters(): array
