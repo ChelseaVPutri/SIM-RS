@@ -73,7 +73,7 @@ final class DaftarPegawaiTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('No', 'id'),
+            Column::make('No', 'id')->index(),
 
             Column::make('Nama lengkap', 'nama_lengkap')
                 ->sortable()
