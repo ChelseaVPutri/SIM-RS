@@ -100,6 +100,13 @@ final class DaftarPegawaiTable extends PowerGridComponent
     public function filters(): array
     {
         return [
+            Filter::select('status', 'status')
+                ->dataSource([
+                    ['status' => 'aktif', 'label' => 'Aktif'],
+                    ['status' => 'cuti', 'label' => 'Cuti'],
+                ])
+                ->optionLabel('label')
+                ->optionValue('status')
         ];
     }
 
