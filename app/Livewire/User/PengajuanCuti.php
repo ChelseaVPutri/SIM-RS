@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -9,7 +9,9 @@ use App\Models\Pegawai;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 
+#[Title('Pengajuan Cuti')]
 class PengajuanCuti extends Component
 {
     use WithFileUploads;
@@ -32,6 +34,21 @@ class PengajuanCuti extends Component
         'alasan' => 'required|string|min:10',
         'bukti_foto' => 'nullable|image|max:5120'
     ];
+
+    protected function messages() {
+        return [
+            'jenis_cuti.required' => 'Silakan pilih jenis cuti terlebih dahulu.',
+
+            'tanggal_mulai.required' => 'Tanggal mulai wajib diisi.',
+            'tanggal_mulai.after_or_equal' => 'Tanggal mulai tidak boleh hari yang sudah lewat (minimal hari ini)',
+
+            'tanggal_selesai.required' => 'Tanggal selesai wajib diisi',
+            'tanggal_selesai.after_or_equal' => 'Tanggal selesai harus sama atau setelah tanggal mulai.',
+
+            'alasan.required' => 'Alasan cuti wajib diisi',
+            'alasan.min' => 'Alasan cuti terlalu pendek. Minimal 10 karakter',
+        ];
+    }
 
     public function mount() {
         $pegawai = Auth::user();
@@ -86,12 +103,13 @@ class PengajuanCuti extends Component
         $this->reset(['jenis_cuti', 'tanggal_mulai', 'tanggal_selesai', 'alasan', 'bukti_foto']);
         $this->mount();
         $this->dispatch('show-toast', message: 'Pengajuan cuti berhasil dikirim!');
+        $this->dispatch('pg:eventRefresh-pengajuanCutiTable');
 
 
     }
 
     public function render()
     {
-        return view('livewire.pengajuan-cuti');
+        return view('livewire.user.pengajuan-cuti');
     }
 }

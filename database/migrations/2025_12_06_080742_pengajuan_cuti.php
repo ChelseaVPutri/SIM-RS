@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('tanggal_selesai_cuti');
             $table->text('alasan_cuti');
             $table->string('foto_bukti')->nullable();
-            $table->enum('status', ['Disetujui', 'Pending']);
+            $table->enum('status', ['Disetujui', 'Pending', 'Ditolak']);
             $table->timestamps();
         });
     }
