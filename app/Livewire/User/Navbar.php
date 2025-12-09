@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Manajer;
+namespace App\Livewire\User;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,9 +14,8 @@ class Navbar extends Component
 
         return redirect('/');
     }
-    
     public function render()
     {
-        return view('livewire.manajer.navbar');
+        return view('livewire.user.navbar');
     }
 }

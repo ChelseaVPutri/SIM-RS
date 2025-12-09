@@ -201,13 +201,87 @@
                 </div>
 
                 {{-- Table --}}
-                <div>
-                    
+                <div class="p-4">
+                    <livewire:pengajuan-cuti-table />
                 </div>
             </div>
         </div>
     </div>
     {{-- Main Content - End --}}
+
+    {{-- Modal - Start --}}
+    <div
+        x-data="{ showModal: false, imageUrl: '' }"
+        x-on:open-bukti-modal.window="showModal = true; imageUrl = $event.detail.url"
+        x-show="showModal"
+        style="display: none;"
+        class="relative z-999" 
+        aria-labelledby="modal-title" 
+        role="dialog" 
+        aria-modal="true"
+    >
+        {{-- Backdrop --}}
+        <div
+            x-show="showModal"
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-gray-900/75 transition-opacity backdrop-blur-sm"
+        ></div>
+
+        {{-- Modal Wrapper --}}
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                {{-- Modal Content --}}
+                <div
+                    x-show="showModal"
+                    @click.outside="showModal = false"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
+                >
+                    {{-- Header --}}
+                    <div class="flex items-center justify-between border-b border-gray-200 px-4 py-4 sm:px-6">
+                        {{-- Title --}}
+                        <h3 id="modal-title" class="text-base font-semibold leading-6 text-gray-900">
+                            Bukti Lampiran
+                        </h3>
+
+                        {{-- Close Icon --}}
+                        <button @click="showModal = false" type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            <span class="sr-only">Close</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="m12 13.4l-2.917 2.925q-.277.275-.704.275t-.704-.275q-.275-.275-.275-.7t.275-.7L10.6 12L7.675 9.108Q7.4 8.831 7.4 8.404t.275-.704q.275-.275.7-.275t.7.275L12 10.625L14.892 7.7q.277-.275.704-.275t.704.275q.3.3.3.713t-.3.687L13.375 12l2.925 2.917q.275.277.275.704t-.275.704q-.3.3-.712.3t-.688-.3z"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+
+                    {{-- Body --}}
+                    <div class="bg-gray-50 p-4 flex justify-center items-center min-h-[200px]">
+                        {{-- Tampilkan gambar hanya jika URL ada --}}
+                        <template x-if="imageUrl">
+                            <img :src="imageUrl" class="max-w-full max-h-[80vh] rounded shadow-sm object-contain" alt="Bukti Cuti">
+                        </template>
+                        
+                        {{-- Loading state optional --}}
+                        <template x-if="!imageUrl">
+                            <span class="text-gray-400">Memuat gambar...</span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal - End --}}
 
     {{-- Toast - Start --}}
     <div 

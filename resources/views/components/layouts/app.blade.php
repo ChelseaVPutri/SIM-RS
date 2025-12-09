@@ -19,7 +19,13 @@
 
 <body class="min-h-screen relative flex flex-col w-full bg-[#f6f6f8]">
     {{-- Navbar --}}
-    <livewire:manajer.navbar />
+    @auth
+        @if (Auth::user()->role === 'manajer')
+            <livewire:manajer.navbar />
+        @elseif (Auth::user()->role === 'user')
+            <livewire:user.navbar />
+        @endif
+    @endauth
 
     {{-- Main Content --}}
     <div>
