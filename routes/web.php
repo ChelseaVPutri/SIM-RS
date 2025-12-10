@@ -4,6 +4,7 @@ use App\Livewire\User\DashboardUser;
 use App\Livewire\Manajer\DaftarPegawai;
 use App\Livewire\Manajer\DashboardManager;
 use App\Livewire\LandingPage;
+use App\Livewire\Manajer\PersetujuanCuti;
 use App\Livewire\User\PengajuanCuti;
 use App\Livewire\Manajer\TambahJadwal;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ Route::middleware(['auth', 'role:manajer'])->prefix('manajer')->group(function (
     Route::get('/dashboard', DashboardManager::class)->name('manajer-dashboard');
     Route::get("/daftar-pegawai", DaftarPegawai::class)->name("daftar-pegawai");
     Route::get('/kelola-jadwal', TambahJadwal::class)->name('kelola-jadwal');
+    Route::get('/persetujuan-cuti', PersetujuanCuti::class)->name('persetujuan-cuti');
 });
 
 
