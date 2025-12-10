@@ -83,9 +83,7 @@ final class PegawaiTableDashboard extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Department', 'nama_department', 'department.nama_department')
-                ->sortable()
-                ->searchable(),
+            Column::make('Department', 'nama_department', 'department.nama_department'),
             
             Column::make('Shift', 'shift_info', 'shift.nama_shift')
         ];
@@ -108,13 +106,13 @@ final class PegawaiTableDashboard extends PowerGridComponent
             ]);
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name'),
-            Filter::datepicker('created_at_formatted', 'created_at'),
-        ];
-    }
+    // public function filters(): array
+    // {
+    //     return [
+    //         Filter::inputText('name'),
+    //         Filter::datepicker('created_at_formatted', 'created_at'),
+    //     ];
+    // }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void

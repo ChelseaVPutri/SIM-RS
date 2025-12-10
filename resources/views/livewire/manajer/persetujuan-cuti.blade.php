@@ -20,7 +20,7 @@
                     Perlu Persetujuan
                 </p>
                 <p class="text-3xl font-bold text-yellow-600">
-                    2
+                    {{ $total_pending }}
                 </p>
             </div>
 
@@ -47,7 +47,7 @@
                     Disetujui Bulan Ini
                 </p>
                 <p class="text-3xl font-bold text-green-600">
-                    2
+                    {{ $total_disetujui }}
                 </p>
             </div>
 
@@ -74,7 +74,7 @@
                     Ditolak Bulan Ini
                 </p>
                 <p class="text-3xl font-bold text-red-600">
-                    2
+                    {{ $total_ditolak }}
                 </p>
             </div>
 
