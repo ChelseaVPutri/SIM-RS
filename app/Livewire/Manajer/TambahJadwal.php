@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Pegawai;
 use App\Models\Shift;
 use App\Models\Jadwal;
+use App\Models\PengajuanCuti;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -38,11 +39,27 @@ class TambahJadwal extends Component
 
     public function save() {
         $this->validate([
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date|after_or_equal:today',
             'department_id' => 'required',
             'pegawai_id' => 'required',
             'shift_id' => 'required',
+        ], [
+            'tanggal.after_or_equal' => 'Tanggal penugasan minimal hari ini.'
         ]);
+
+        // Validasi cuti
+        $isCuti = PengajuanCuti::where('pegawai_id', $this->pegawai_id)
+            ->where('status', 'Disetujui')
+            ->where(function ($query) {
+                $query->whereDate('tanggal_mulai_cuti', '<=', $this->tanggal)
+                    ->whereDate('tanggal_selesai_cuti', '>=', $this->tanggal);
+            })
+            ->exists();
+
+            if($isCuti) {
+                $this->addError('pegawai_id', 'Pegawai sedang cuti pada tanggal tersebut dan tidak dapat ditugaskan');
+                return;
+            }
 
         Jadwal::create([
             'tanggal' => $this->tanggal,

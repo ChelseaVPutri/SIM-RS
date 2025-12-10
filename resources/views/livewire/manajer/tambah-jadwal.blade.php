@@ -32,8 +32,13 @@
                         Tanggal Tugas
                     </label>
                     <div class="relative">
-                        <input type="date" id="date" wire:model="tanggal" class="w-full rounded-lg border-gray-300 bg-white px-3 py-2.5 text-gray-900 focus:border-primary focus:ring-primary sm:text-sm" required>
+                        <input type="date" id="date" wire:model="tanggal" min="{{ date('Y m d') }}" class="w-full rounded-lg border-gray-300 bg-white px-3 py-2.5 text-gray-900 focus:border-primary focus:ring-primary sm:text-sm" required>
                     </div>
+                    @error('tanggal')
+                        <span class="text-red-500 text-xs">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 {{-- Department --}}
