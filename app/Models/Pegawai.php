@@ -18,6 +18,7 @@ class Pegawai extends Authenticatable
         'nomor_telepon',
         'password',
         'department_id',
+        'hari_libur',
         'status',
         'sisa_cuti',
         'role'
@@ -26,7 +27,8 @@ class Pegawai extends Authenticatable
     protected $hidden = ['password'];
 
     protected $casts = [
-        'password' => 'hashed'
+        'password' => 'hashed',
+        'hari_libur' => 'array',
     ];
 
     public function getAuthIdentifierName()

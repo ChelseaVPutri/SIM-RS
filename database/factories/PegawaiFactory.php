@@ -22,6 +22,13 @@ class PegawaiFactory extends Factory
             '0812', '0813', '0858'
         ]);
 
+        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+        $startIndex = rand(0, 6);
+        $libur = [
+            $days[$startIndex],
+            $days[($startIndex + 1) % 7]
+        ];
+
         return [
             'nama_lengkap' => $this->faker->name(),
             'nip' => str_pad($this->faker->numberBetween(1, 99999), 5, '0', STR_PAD_LEFT),
@@ -29,7 +36,8 @@ class PegawaiFactory extends Factory
             'department_id' => Department::inRandomOrder()->first()->id,
             'sisa_cuti' => 12,
             'password' => Hash::make('123'),
-            'status' => 'aktif', 
+            'status' => 'aktif',
+            'hari_libur' => $libur,
             'role' => 'user'
         ];
     }

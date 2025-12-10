@@ -7,6 +7,7 @@ use App\Models\Pegawai;
 use App\Models\Shift;
 use App\Models\Jadwal;
 use App\Models\PengajuanCuti;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -34,7 +35,9 @@ class TambahJadwal extends Component
             return [];
         }
 
-        return Pegawai::where('department_id', $this->department_id)->get();
+        return Pegawai::where('department_id', $this->department_id)
+            ->where('role', 'user')
+            ->get();
     }
 
     public function save() {
@@ -46,6 +49,19 @@ class TambahJadwal extends Component
         ], [
             'tanggal.after_or_equal' => 'Tanggal penugasan minimal hari ini.'
         ]);
+
+        // Validasi hari libur
+        $pegawai = Pegawai::find($this->pegawai_id);
+        if ($pegawai && $pegawai->hari_libur) {
+            $namaHariJadwal = Carbon::parse($this->tanggal)->locale('id')->translatedFormat('l');
+
+        // Cek apakah nama hari ini ada di array hari_libur pegawai
+        if (in_array($namaHariJadwal, $pegawai->hari_libur)) {
+            $strLibur = implode(' & ', $pegawai->hari_libur);
+            $this->addError('pegawai_id', "Pegawai ini libur rutin setiap {$strLibur}. Tidak bisa ditugaskan pada hari {$namaHariJadwal}.");
+            return;
+        }
+    }
 
         // Validasi cuti
         $isCuti = PengajuanCuti::where('pegawai_id', $this->pegawai_id)

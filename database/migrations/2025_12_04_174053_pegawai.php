@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('department')->cascadeOnDelete()->cascadeOnUpdate();
 
+            $table->json('hari_libur')->nullable();
             $table->integer('sisa_cuti');
             $table->enum('status', ['Aktif', 'Cuti']);
             $table->enum('role', ['manajer', 'user']);

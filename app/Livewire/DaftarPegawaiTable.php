@@ -55,6 +55,7 @@ final class DaftarPegawaiTable extends PowerGridComponent
             ->add('nip')
             ->add('nomor_telepon')
             ->add('nama_dept_asli')
+
             ->add('status', function (Pegawai $model) {
                 $status = $model->status ?? 'Tidak Diketahui';
 
@@ -67,6 +68,22 @@ final class DaftarPegawaiTable extends PowerGridComponent
                 }
 
                 return "<span class='inline-flex items-center px-3 py-1 text-sm font-medium rounded-lg {$badges}'>{$status}</span>";
+            })
+
+            ->add('hari_libur_formatted', function (Pegawai $model) {
+            $days = $model->hari_libur ?? [];
+            
+            if (empty($days)) return '-';
+
+            $html = '<div class="flex gap-1">';
+            foreach($days as $day) {
+                $html .= "
+                <span class='px-2 py-1 text-xs font-medium bg-gray-100 border border-gray-300 rounded'>
+                    {$day}
+                </span>";
+            }
+            $html .= '</div>';
+            return $html;
             });
     }
 
@@ -90,6 +107,9 @@ final class DaftarPegawaiTable extends PowerGridComponent
             Column::make('Department', 'nama_dept_asli', 'department.nama_department')
                 ->sortable()
                 ->searchable(),
+            
+            Column::make('Hari Libur', 'hari_libur_formatted')
+                ->sortable(),
 
             Column::make('Status', 'status')
                 ->sortable()
